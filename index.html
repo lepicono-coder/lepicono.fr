@@ -203,8 +203,13 @@ input,select,textarea{font:inherit;font-size:1rem;padding:12px 14px;border:2px s
 input:focus,select:focus,textarea:focus{border-color:var(--rouge);outline:none}
 textarea{min-height:110px;resize:vertical}
 .result{grid-column:1/-1;background:var(--blanc);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:12px}
-.result pre{white-space:pre-wrap;font-family:ui-monospace,Menlo,monospace;font-size:.85rem;margin:0;max-height:260px;overflow:auto}
-.result .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.result.ok{border:3px solid var(--rouge);text-align:center;padding:28px 20px;font-size:1.05rem}
+.result.ok strong{font-family:var(--slab);font-weight:400;color:var(--rouge);text-transform:uppercase;font-size:1.4rem;line-height:1.1}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.opt{font-weight:500;color:var(--gris)}
+input[type=date]{min-height:48px}
+form{position:relative}
+.btn:disabled{opacity:.7;cursor:wait;transform:none}
 
 
 .socials{display:flex;flex-wrap:wrap;gap:10px}
@@ -705,36 +710,36 @@ footer p{opacity:.9;font-size:.92rem}
       </div>
       <div class="cony cony-wave" data-anim aria-hidden="true"><span class="bulle">Have a nice cone !</span><div class="cony-body"><img class="cony-img" src="img/cony.png" alt="" width="386" height="520"></div></div>
     </div>
-    <form id="devis" novalidate>
-      <div class="f"><label for="nom">Nom et prénom</label><input id="nom" name="nom" autocomplete="name"></div>
+    <form id="devis" name="devis" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+      <input type="hidden" name="form-name" value="devis">
+      <p class="hp" aria-hidden="true"><label>Ne pas remplir <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <input type="hidden" name="subject" id="subject" value="Nouvelle demande de devis PICONO">
+      <div class="f"><label for="nom">Nom et prénom *</label><input id="nom" name="nom" autocomplete="name" required></div>
       <div class="f"><label for="structure">Structure</label><input id="structure" name="structure" placeholder="Festival, mairie, agence…"></div>
-      <div class="f"><label for="email">E-mail</label><input id="email" name="email" type="email" autocomplete="email"></div>
-      <div class="f"><label for="tel">Téléphone</label><input id="tel" name="tel" type="tel" autocomplete="tel"></div>
-      <div class="f"><label for="type">Type d'événement</label>
-        <select id="type" name="type">
+      <div class="f"><label for="email">E-mail *</label><input id="email" name="email" type="email" autocomplete="email" required></div>
+      <div class="f"><label for="tel">Téléphone</label><input id="tel" name="telephone" type="tel" autocomplete="tel"></div>
+      <div class="f full"><label for="type">Type d'événement</label>
+        <select id="type" name="type_evenement">
           <option>Festival</option><option>Feria</option><option>Marché de Noël</option><option>Marché</option>
           <option>Mariage</option><option>Service traiteur</option><option>Événement sportif</option><option>Événement d'entreprise</option><option>Autre</option>
         </select>
       </div>
-      <div class="f"><label for="date">Date(s)</label><input id="date" name="date" placeholder="ex. 12 au 14 juin 2027"></div>
+      <div class="f"><label for="date_debut">Date de début</label><input id="date_debut" name="date_debut" type="date"></div>
+      <div class="f"><label for="date_fin">Date de fin <span class="opt">(si plusieurs jours)</span></label><input id="date_fin" name="date_fin" type="date"></div>
       <div class="f"><label for="lieu">Lieu</label><input id="lieu" name="lieu" placeholder="Ville"></div>
       <div class="f"><label for="public">Fréquentation attendue</label>
-        <select id="public" name="public">
+        <select id="public" name="frequentation">
           <option>Moins de 200 personnes</option><option>200 à 1 000 personnes</option><option>1 000 à 5 000 personnes</option><option>Plus de 5 000 personnes</option>
         </select>
       </div>
       <div class="f full"><label for="message">Votre projet</label><textarea id="message" name="message" placeholder="Durée, horaires, recette sur mesure souhaitée…"></textarea></div>
       <div class="f full" style="flex-direction:row;align-items:center;gap:14px;flex-wrap:wrap">
-        <button class="btn" type="submit">Préparer ma demande</button>
+        <button class="btn" type="submit" id="send">Envoyer ma demande</button>
         <span class="hint" id="err" role="alert"></span>
       </div>
-      <div class="result" id="result" hidden>
-        <strong>Votre demande est prête. Copiez-la et envoyez-la à lepicono@gmail.com.</strong>
-        <pre id="out"></pre>
-        <div class="row">
-          <button class="btn small" type="button" id="copy">Copier la demande</button>
-          <span class="hint" id="copied" aria-live="polite"></span>
-        </div>
+      <div class="result ok" id="result" hidden role="status">
+        <strong>Merci, votre demande a bien été envoyée !</strong>
+        <p>Votre demande va être traitée et vous allez être recontacté dans les prochaines 24 h.</p>
       </div>
     </form>
   </div>
@@ -760,24 +765,27 @@ footer p{opacity:.9;font-size:.92rem}
   else{var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('on');io.unobserve(x.target)}})},{threshold:.35});els.forEach(function(e){io.observe(e)});}
 })();
 (function(){
-  var form=document.getElementById('devis'),out=document.getElementById('out'),res=document.getElementById('result'),err=document.getElementById('err');
+  var form=document.getElementById('devis'),res=document.getElementById('result'),err=document.getElementById('err'),btn=document.getElementById('send');
+  var d1=document.getElementById('date_debut'),d2=document.getElementById('date_fin');
+  var today=new Date(),iso=new Date(today.getTime()-today.getTimezoneOffset()*60000).toISOString().slice(0,10);
+  d1.min=iso;d2.min=iso;
+  d1.addEventListener('change',function(){d2.min=d1.value||iso;if(d2.value&&d2.value<d1.value)d2.value=d1.value});
   form.addEventListener('submit',function(e){
     e.preventDefault();
     var v=function(id){return document.getElementById(id).value.trim()};
+    var mail=document.getElementById('email');
     if(!v('nom')||!v('email')){err.textContent='Indiquez au moins votre nom et votre e-mail.';return}
+    if(!mail.checkValidity()){err.textContent='Vérifiez votre adresse e-mail.';mail.focus();return}
     err.textContent='';
-    var t='Objet : Demande de prestation Picono – '+v('type')+'\n\n'+
-      'Nom : '+v('nom')+'\n'+(v('structure')?'Structure : '+v('structure')+'\n':'')+
-      'E-mail : '+v('email')+'\n'+(v('tel')?'Téléphone : '+v('tel')+'\n':'')+
-      'Type d’événement : '+v('type')+'\n'+(v('date')?'Date(s) : '+v('date')+'\n':'')+
-      (v('lieu')?'Lieu : '+v('lieu')+'\n':'')+'Fréquentation : '+v('public')+'\n'+
-      (v('message')?'\n'+v('message')+'\n':'');
-    out.textContent=t;res.hidden=false;res.scrollIntoView({block:'nearest'});
-  });
-  document.getElementById('copy').addEventListener('click',function(){
-    var msg=document.getElementById('copied');
-    var sel=function(){var r=document.createRange();r.selectNodeContents(out);var s=getSelection();s.removeAllRanges();s.addRange(r);msg.textContent='Texte sélectionné, copiez-le avec Ctrl+C.'};
-    try{navigator.clipboard.writeText(out.textContent).then(function(){msg.textContent='Copié.'},sel)}catch(x){sel()}
+    document.getElementById('subject').value='Demande de devis PICONO – '+v('type')+' – '+v('nom');
+    btn.disabled=true;btn.textContent='Envoi en cours…';
+    var body=new URLSearchParams(new FormData(form)).toString();
+    fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body})
+      .then(function(r){if(!r.ok)throw new Error(r.status);
+        form.querySelectorAll('.f').forEach(function(f){f.hidden=true});
+        res.hidden=false;res.scrollIntoView({block:'nearest',behavior:'smooth'});})
+      .catch(function(){btn.disabled=false;btn.textContent='Envoyer ma demande';
+        err.textContent="L'envoi n'a pas fonctionné. Réessayez ou écrivez-nous à lepicono@gmail.com.";});
   });
 })();
 </script>
