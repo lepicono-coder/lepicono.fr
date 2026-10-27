@@ -1,0 +1,786 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="PICONO, la pizza en cône pour vos festivals, marchés, marchés de Noël, ferias, mariages et événements. Fabriqué en Haute-Garonne.">
+<meta property="og:title" content="PICONO · La pizza en cône">
+<meta property="og:description" content="Street-food pour festivals, marchés et événements. Demandez un devis.">
+<meta property="og:image" content="img/foule.jpg">
+<link rel="icon" href="img/logo-rouge.png">
+<title>PICONO · La pizza en cône</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Archivo+Black&family=Instrument+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Layout : identité du camion PICONO — bandes jaunes et rouges pleine largeur, photos réelles en grand, contenu à 1160px.
+   Look de marque assumé en un seul thème (jaune/rouge), toutes les couleurs définies explicitement. */
+:root{
+  --jaune:#FFD400;
+  --jaune-pale:#FFF4BF;
+  --rouge:#E30613;
+  --rouge-fonce:#B8050F;
+  --encre:#2B1710;
+  --gris:#6B5A50;
+  --blanc:#FFFFFF;
+  --vert-camion:#1F4D36;
+  --ligne:#EADFC8;
+  --pate:#E3A35A;
+  --slab:"Alfa Slab One","Rockwell","Georgia",serif;
+  --wide:"Archivo Black","Arial Black","Helvetica Neue",sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--blanc);color:var(--encre);font-family:var(--body);font-size:17px;line-height:1.6}
+img{display:block;max-width:100%}
+.wrap{max-width:1160px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+section{padding-block:88px}
+h1,h2,h3{text-wrap:balance;margin:0}
+h2{font-family:var(--slab);font-weight:400;font-size:clamp(2rem,4.8vw,3.3rem);line-height:1.08;color:var(--rouge);text-transform:uppercase}
+h3{font-size:1.2rem;font-weight:700;line-height:1.3}
+p{margin:0}
+.eyebrow{font-family:var(--wide);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--rouge)}
+.lead{font-size:1.15rem;color:var(--gris);max-width:60ch}
+.stack{display:flex;flex-direction:column;gap:16px}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--encre);outline-offset:3px;border-radius:4px}
+.photo{border-radius:20px;overflow:hidden;background:var(--jaune-pale)}
+.photo img{width:100%;height:100%;object-fit:cover}
+
+/* En-tête */
+header.top{background:var(--blanc);border-bottom:1px solid var(--ligne)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px;flex-wrap:wrap}
+.logo img{height:44px;width:auto}
+nav ul{display:flex;gap:24px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+nav a{text-decoration:none;font-weight:700;font-size:.95rem}
+nav a:hover{color:var(--rouge)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--rouge);color:var(--blanc);text-decoration:none;padding:14px 26px;border-radius:999px;border:0;font:inherit;font-weight:700;cursor:pointer;transition:transform .15s ease,background .15s ease}
+.btn:hover{transform:translateY(-2px);background:var(--rouge-fonce)}
+.btn.light{background:var(--blanc);color:var(--rouge)}
+.btn.outline{background:transparent;color:var(--rouge);box-shadow:inset 0 0 0 2.5px var(--rouge)}
+.btn.small{padding:10px 18px;font-size:.92rem}
+
+/* Héros */
+.hero{background:var(--jaune);padding-block:56px 0;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:end}
+.hero-txt{padding-bottom:72px;display:flex;flex-direction:column;gap:22px}
+.hero h1{font-family:var(--slab);font-weight:400;font-size:clamp(3rem,8.4vw,6.4rem);line-height:.95;color:var(--rouge);text-transform:uppercase}
+.hero .lead{color:var(--encre);font-size:1.2rem}
+.hero .ctas{display:flex;gap:12px;flex-wrap:wrap}
+.hero .badges{display:flex;gap:10px;flex-wrap:wrap}
+.badge{background:var(--rouge);color:var(--blanc);font-family:var(--wide);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;padding:7px 14px;border-radius:999px}
+.hero-img{align-self:center;display:grid;place-items:center;position:relative;padding-block:24px 56px}
+.hero-img::before{content:"";position:absolute;width:min(380px,80vw);aspect-ratio:1;border-radius:50%;background:var(--rouge);top:50%;left:50%;transform:translate(-50%,-58%)}
+.hero-img img{position:relative;width:min(300px,62vw);height:auto;filter:drop-shadow(0 24px 22px rgba(120,40,0,.35));animation:sway 5s ease-in-out infinite;transform-origin:50% 85%}
+@keyframes sway{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
+
+/* Bandeau Rio Loco photo */
+.bandeau{position:relative;padding:0;background:var(--encre)}
+.bandeau img{width:100%;height:clamp(280px,46vw,560px);object-fit:cover;object-position:50% 40%;opacity:.92}
+.bandeau .cap{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(transparent,rgba(43,23,16,.85))}
+.bandeau .cap .wrap{padding-block:60px 28px;color:var(--blanc);display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap}
+.bandeau .cap p{font-family:var(--slab);font-size:clamp(1.4rem,3.2vw,2.2rem);line-height:1.1;text-transform:uppercase}
+.bandeau .cap span{font-weight:600;opacity:.9}
+
+/* Les 4 plus */
+.plus-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:40px}
+.histoire{overflow:hidden}
+#evenements,.contact{overflow:hidden}
+.preuve{overflow:hidden}
+.produit,section[aria-labelledby="plus-titre"]{overflow:hidden}
+.plus-item{background:var(--jaune);border-radius:20px;padding:26px 22px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.plus-item .k{font-family:var(--slab);font-size:1.5rem;line-height:1.05;color:var(--rouge);text-transform:uppercase}
+
+/* Produit */
+.produit{background:var(--jaune-pale)}
+.produit .prod{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.produit .photo{aspect-ratio:4/5}
+.checks{list-style:none;padding:0;margin:4px 0 0;display:grid;gap:12px}
+.checks li{display:flex;gap:14px;align-items:center;font-size:1.12rem;font-weight:700}
+.checks li::before{content:"";flex:none;width:14px;height:20px;background:var(--rouge);clip-path:polygon(0 0,100% 0,50% 100%)}
+.fiche{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
+.fiche div{background:var(--blanc);border-radius:14px;padding:14px 16px;min-width:0}
+.fiche b{display:block;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gris)}
+
+/* Carte */
+.carte-head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap}
+.recettes{display:grid;grid-template-columns:repeat(3,1fr);gap:34px 18px;margin-top:52px}
+.recette{position:relative;border:2px solid var(--ligne);border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:10px;min-width:0;transition:border-color .15s ease}
+.recette:hover{border-color:var(--rouge)}
+.recette h3{font-family:var(--slab);font-weight:400;font-size:1.45rem;color:var(--rouge);text-transform:uppercase}
+.recette p{color:var(--gris)}
+.recette .ingr{color:var(--encre);font-weight:600;line-height:1.5}
+.tagv.saison{color:var(--rouge-fonce);background:var(--jaune-pale)}
+.tagv{align-self:flex-start;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--vert-camion);background:#E3EFE7;padding:3px 10px;border-radius:999px}
+.sur-mesure{margin-top:18px;background:var(--rouge);color:var(--blanc);border-radius:24px;padding:40px;display:grid;grid-template-columns:1.3fr 1fr auto;gap:32px;align-items:center}
+.sur-mesure h3{font-family:var(--slab);font-weight:400;font-size:clamp(1.6rem,3vw,2.2rem);text-transform:uppercase;line-height:1.05;color:var(--jaune)}
+.sur-mesure ul{margin:0;padding-left:20px;display:grid;gap:6px;font-weight:600}
+.extras{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+.extra{background:var(--jaune);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.extra h3{font-family:var(--slab);font-weight:400;font-size:1.5rem;color:var(--rouge);text-transform:uppercase}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{font-size:.95rem;font-weight:700;padding:7px 15px;border-radius:999px;background:var(--blanc)}
+
+
+/* Allergènes */
+.allergenes{background:var(--jaune-pale)}
+.table-wrap{overflow-x:auto;margin-top:36px;border-radius:20px;background:var(--blanc)}
+.al-table{width:100%;border-collapse:collapse;min-width:420px}
+.al-table th,.al-table td{text-align:left;padding:14px 18px;border-bottom:1px solid var(--ligne);vertical-align:middle}
+.al-table thead th{font-family:var(--wide);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--rouge);background:var(--blanc)}
+.al-table tbody th{font-weight:700}
+.al-table tbody tr:last-child th,.al-table tbody tr:last-child td{border-bottom:0}
+.al{display:inline-block;font-size:.8rem;font-weight:700;padding:3px 10px;border-radius:999px}
+.al.oui{background:var(--rouge);color:var(--blanc)}
+.al.non{background:#E3EFE7;color:var(--vert-camion)}
+.al.conf{background:var(--ligne);color:var(--gris)}
+.al-legende{margin-top:20px;display:grid;gap:8px;max-width:80ch}
+
+/* Preuve */
+.preuve{background:var(--rouge);color:var(--blanc)}
+.preuve .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+.preuve h2{color:var(--jaune)}
+.preuve .eyebrow{color:var(--blanc);opacity:.85}
+.preuve .lead{color:var(--blanc);opacity:.92}
+.chiffres{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:32px}
+.chiffre{display:flex;flex-direction:column;gap:4px;border-top:3px solid var(--jaune);padding-top:14px;min-width:0}
+.chiffre .n{font-family:var(--wide);font-size:clamp(2.2rem,4.4vw,3.2rem);line-height:1;color:var(--jaune);font-variant-numeric:tabular-nums}
+.chiffre .u{font-weight:700;line-height:1.3}
+.chiffre .d{opacity:.8;font-size:.92rem}
+.preuve .photo{aspect-ratio:4/5;background:var(--rouge-fonce)}
+
+/* Histoire */
+.histoire .grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:56px;align-items:start}
+.histoire .photo.mex{aspect-ratio:3/4}
+.recit{display:flex;flex-direction:column;gap:18px;font-size:1.08rem;max-width:62ch}
+.recit .sign{font-family:var(--slab);font-size:1.7rem;color:var(--rouge);text-transform:uppercase;line-height:1.1}
+.duo-photos{display:grid;grid-template-columns:1fr 1.5fr;gap:16px;margin-top:8px}
+.duo-photos .photo{aspect-ratio:3/4}
+.duo-photos .photo.wide{aspect-ratio:auto}
+.etapes{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:8px}
+.etape{background:var(--jaune-pale);border-radius:14px;padding:16px;min-width:0;font-size:.98rem}
+.etape b{display:block;font-family:var(--wide);font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;color:var(--rouge);margin-bottom:2px}
+
+/* Coulisses */
+.coulisses{background:var(--encre);color:var(--blanc)}
+.coulisses h2{color:var(--jaune)}
+.coulisses .eyebrow{color:var(--jaune)}
+.galerie{display:grid;grid-auto-flow:dense;grid-template-columns:repeat(4,1fr);grid-auto-rows:220px;gap:14px;margin-top:40px}
+.galerie figure{margin:0;border-radius:16px;overflow:hidden;position:relative;background:#3a261c}
+.galerie figure img{width:100%;height:100%;object-fit:cover}
+.galerie figcaption{position:absolute;left:10px;bottom:10px;background:var(--jaune);color:var(--encre);font-size:.8rem;font-weight:700;padding:4px 10px;border-radius:999px}
+.g-tall{grid-row:span 2}
+.g-wide{grid-column:span 2}
+
+/* Événements */
+.event-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:36px}
+.event{border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:6px;min-width:0;background:var(--jaune-pale)}
+.event h3{color:var(--rouge);font-family:var(--slab);font-weight:400;text-transform:uppercase;font-size:1.15rem}
+.event p{font-size:.95rem;color:var(--gris)}
+
+/* RSE */
+.rse{background:var(--jaune)}
+.rse .wrap{display:grid;grid-template-columns:1fr 1.15fr;gap:56px;align-items:start}
+.rse .lead{color:var(--encre)}
+.rse-list{list-style:none;margin:0;padding:0}
+.rse-list li{display:flex;gap:16px;align-items:center;padding:16px 0;border-bottom:2px solid var(--rouge);font-weight:700;font-size:1.08rem}
+.rse-list li:first-child{border-top:2px solid var(--rouge)}
+.rse-list li::before{content:"";flex:none;width:12px;height:17px;background:var(--rouge);clip-path:polygon(0 0,100% 0,50% 100%)}
+
+/* Contact */
+.contact .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:start}
+.mail-box{margin-top:8px;display:flex;flex-direction:column;gap:4px;background:var(--jaune-pale);border-radius:16px;padding:18px 20px}
+.mail-box .addr{font-weight:700;font-size:1.15rem;user-select:all;word-break:break-all;color:var(--rouge)}
+.hint{font-size:.88rem;color:var(--gris)}
+form{background:var(--jaune);border-radius:24px;padding:28px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.f{display:flex;flex-direction:column;gap:6px;min-width:0}
+.f.full{grid-column:1/-1}
+label{font-weight:700;font-size:.92rem}
+input,select,textarea{font:inherit;font-size:1rem;padding:12px 14px;border:2px solid transparent;border-radius:12px;background:var(--blanc);color:var(--encre);width:100%}
+input:focus,select:focus,textarea:focus{border-color:var(--rouge);outline:none}
+textarea{min-height:110px;resize:vertical}
+.result{grid-column:1/-1;background:var(--blanc);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:12px}
+.result pre{white-space:pre-wrap;font-family:ui-monospace,Menlo,monospace;font-size:.85rem;margin:0;max-height:260px;overflow:auto}
+.result .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+
+
+.socials{display:flex;flex-wrap:wrap;gap:10px}
+.socials a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:700;background:var(--blanc);color:var(--rouge);padding:9px 16px;border-radius:999px;transition:transform .15s ease}
+.socials a:hover{transform:translateY(-2px)}
+.socials.foot a{background:var(--rouge-fonce);color:var(--blanc)}
+.extra .ex-img{border-radius:14px;overflow:hidden;aspect-ratio:16/10;background:#0b0b0b}
+.extra .ex-img img{width:100%;height:100%;object-fit:cover}
+
+/* Comparaison pâte / garniture */
+.compare{margin-top:56px;background:var(--blanc);border-radius:24px;padding:36px;display:grid;grid-template-columns:1fr auto auto;gap:32px;align-items:center;position:relative;overflow:hidden}
+.comp-title{font-family:var(--slab);font-weight:400;font-size:clamp(1.5rem,2.6vw,2rem);color:var(--rouge);text-transform:uppercase;line-height:1.05}
+.comp-txt{min-width:0;max-width:44ch}
+.donuts{display:flex;gap:28px;flex-wrap:wrap;justify-content:center}
+.donut{margin:0;display:flex;flex-direction:column;align-items:center;gap:10px;width:170px}
+.donut svg{width:150px;height:150px;transform:rotate(-90deg)}
+.donut text{transform:rotate(90deg);transform-origin:21px 21px;text-anchor:middle;fill:var(--encre)}
+.d-num{font-family:var(--wide);font-size:8px}
+.d-lab{font-size:3.4px;font-weight:700;fill:var(--gris)!important;letter-spacing:.04em;text-transform:uppercase}
+.donut figcaption{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.9rem;text-align:center}
+.donut figcaption b{font-family:var(--slab);font-weight:400;color:var(--rouge);text-transform:uppercase;font-size:1.05rem}
+.sw{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:0}
+.sw-g{background:var(--rouge)}.sw-p{background:var(--pate)}
+.donut.on .seg{animation:drawSeg 1.4s cubic-bezier(.3,.7,.2,1) both}
+@keyframes drawSeg{from{stroke-dasharray:0 100}to{stroke-dasharray:var(--g) calc(100 - var(--g))}}
+
+/* Ingrédients flottants */
+.floaters{position:absolute;top:-22px;right:14px;display:flex;gap:4px;pointer-events:none}
+.floaters svg{width:40px;height:40px;animation:floaty 3.4s ease-in-out infinite;filter:drop-shadow(0 4px 4px rgba(43,23,16,.18))}
+.floaters svg:nth-child(2){animation-delay:-1.1s;animation-duration:3.9s}
+.floaters svg:nth-child(3){animation-delay:-2.2s;animation-duration:3.1s}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(-8deg)}50%{transform:translateY(-9px) rotate(10deg)}}
+.recette:hover .floaters svg{animation-duration:1.2s}
+
+/* Cony */
+.head-cony{display:flex;align-items:flex-end;justify-content:space-between;gap:20px}
+.head-cony .stack{min-width:0}
+.cony{position:relative;flex:none;pointer-events:none;width:120px}
+.cony-body{position:relative}
+.cony-img{width:100%;height:auto;display:block;filter:drop-shadow(0 6px 6px rgba(43,23,16,.18))}
+.bulle{position:absolute;bottom:100%;right:40%;white-space:nowrap;background:var(--blanc);color:var(--rouge);font-family:var(--wide);font-size:.8rem;text-transform:uppercase;padding:7px 12px;border-radius:14px;border:2.5px solid var(--rouge);margin-bottom:6px;z-index:2}
+.bulle::after{content:"";position:absolute;top:100%;right:18px;border:7px solid transparent;border-top-color:var(--rouge)}
+.cony.on .bulle{animation:pop .5s cubic-bezier(.3,1.6,.5,1) both;animation-delay:var(--bd,1s)}
+@keyframes pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+
+/* marche */
+.cony-walk.on .cony-body{animation:walkIn 2.2s cubic-bezier(.25,.8,.3,1) both}
+.cony-walk.on .cony-img{animation:bob .32s ease-in-out 7 alternate}
+.cony-walk{--bd:2.1s}
+@keyframes walkIn{from{transform:translateX(110vw)}to{transform:translateX(0)}}
+@keyframes bob{from{transform:translateY(0) rotate(-3deg)}to{transform:translateY(-8px) rotate(3deg)}}
+
+/* coucou derrière le cadre */
+.cony-peek{position:absolute;right:24px;bottom:0;width:120px;height:118px;overflow:visible}
+.cony-peek .cony-body{transform:translateY(30%)}
+.cony-peek.on .cony-body{animation:peekUp 1.1s cubic-bezier(.3,1.5,.5,1) both,peekIdle 3s ease-in-out 1.1s infinite}
+.cony-peek .bulle{right:0;bottom:72%}
+.cony-peek{--bd:1.1s}
+@keyframes peekUp{from{transform:translateY(100%)}to{transform:translateY(30%)}}
+@keyframes peekIdle{0%,100%{transform:translateY(30%)}50%{transform:translateY(38%)}}
+.compare{padding-right:170px}
+
+/* mange */
+.cony-eat{width:110px;align-self:end}
+.cony-eat .bulle{color:var(--rouge);border-color:var(--jaune);background:var(--jaune);right:55%}
+.cony-eat .bulle::after{border-top-color:var(--jaune)}
+.mini-cone{position:absolute;width:30%;height:auto;left:-6%;top:46%;transform:rotate(-30deg);z-index:1;filter:drop-shadow(0 3px 3px rgba(0,0,0,.25))}
+.cony-eat .cony-img{animation:chomp 2.4s ease-in-out infinite}
+.cony-eat .mini-cone{animation:bite 2.4s ease-in-out infinite}
+@keyframes chomp{0%,40%,100%{transform:scale(1)}50%{transform:scale(1.06,.94)}60%{transform:scale(.97,1.03)}70%{transform:scale(1.04,.96)}}
+@keyframes bite{0%,35%,100%{transform:translate(0,0) rotate(-30deg)}50%,70%{transform:translate(105%,-45%) rotate(-12deg)}}
+.miettes{position:absolute;left:40%;top:40%;z-index:2}
+.miettes i{position:absolute;width:6px;height:6px;border-radius:50%;background:var(--jaune);opacity:0;animation:miette 2.4s ease-out infinite}
+.miettes i:nth-child(2){animation-delay:.08s;background:var(--pate)}
+.miettes i:nth-child(3){animation-delay:.16s}
+@keyframes miette{0%,55%{opacity:0;transform:translate(0,0)}60%{opacity:1}100%{opacity:0;transform:translate(var(--mx,-24px),40px)}}
+.miettes i:nth-child(2){--mx:-6px}.miettes i:nth-child(3){--mx:14px}
+
+/* course */
+.photo-cony{position:relative}
+.cony-run{position:absolute;left:-36px;bottom:-26px;width:130px;--bd:.9s}
+.cony-run .bulle{right:auto;left:55%;border-color:var(--encre);color:var(--encre)}
+.cony-run .bulle::after{right:auto;left:18px;border-top-color:var(--encre)}
+.cony-run.on .cony-body{animation:runIn .9s cubic-bezier(.2,.9,.3,1.2) both}
+.cony-run .cony-img{animation:bob .2s ease-in-out infinite alternate}
+@keyframes runIn{from{transform:translateX(-120vw) rotate(14deg)}to{transform:translateX(0) rotate(0)}}
+.vitesse{position:absolute;left:-46px;top:40%;display:grid;gap:9px}
+.vitesse i{display:block;height:4px;width:40px;border-radius:4px;background:var(--jaune);animation:vit .6s linear infinite}
+.vitesse i:nth-child(2){width:28px;margin-left:12px;animation-delay:-.2s}
+.vitesse i:nth-child(3){animation-delay:-.4s}
+@keyframes vit{from{transform:translateX(10px);opacity:1}to{transform:translateX(-18px);opacity:0}}
+
+/* caché derrière la photo */
+.mex-wrap{position:relative}
+.mex-wrap .photo{position:relative;z-index:1}
+.cony-hide{position:absolute;left:58%;top:-78px;width:100px;z-index:0}
+.cony-hide .cony-body{transform:translateY(0) rotate(8deg)}
+.cony-hide.on .cony-body{animation:hideOut 1s cubic-bezier(.3,1.5,.5,1) .3s both,hideLoop 6s ease-in-out 1.3s infinite}
+.cony-hide .bulle{right:auto;left:78%;bottom:70%;--bd:1.2s}
+.cony-hide .bulle::after{right:auto;left:10px}
+@keyframes hideOut{from{transform:translateY(100%) rotate(0)}to{transform:translateY(0) rotate(8deg)}}
+@keyframes hideLoop{0%,70%,100%{transform:translateY(0) rotate(8deg)}80%,88%{transform:translateY(85%) rotate(0)}}
+
+/* danse */
+.cony-dance .cony-img{animation:dance 1s ease-in-out infinite;transform-origin:50% 95%}
+.cony-dance.on .cony-body{animation:pop .6s cubic-bezier(.3,1.6,.5,1) both}
+@keyframes dance{0%,100%{transform:rotate(-8deg) translateY(0)}25%{transform:rotate(0) translateY(-10px)}50%{transform:rotate(8deg) translateY(0)}75%{transform:rotate(0) translateY(-10px)}}
+.notes{position:absolute;right:-8px;top:0;color:var(--rouge);font-size:1.5rem;font-weight:700}
+.notes i{position:absolute;font-style:normal;animation:note 2.4s ease-out infinite;opacity:0}
+.notes i:nth-child(2){animation-delay:.8s;right:-18px}
+.notes i:nth-child(3){animation-delay:1.6s;right:10px}
+@keyframes note{0%{opacity:0;transform:translateY(20px)}20%{opacity:1}100%{opacity:0;transform:translate(14px,-50px) rotate(20deg)}}
+
+/* coucou */
+.cony-wave{width:120px;margin-top:24px;align-self:flex-start;--bd:.6s}
+.cony-wave .bulle{right:auto;left:70%}
+.cony-wave .bulle::after{right:auto;left:16px}
+.cony-wave .cony-img{animation:wave 1.6s ease-in-out infinite;transform-origin:50% 100%}
+.cony-wave.on .cony-body{animation:jump .7s cubic-bezier(.3,1.6,.5,1) both}
+@keyframes wave{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(6deg)}}
+@keyframes jump{from{transform:translateY(60px) scale(.6);opacity:0}to{transform:none;opacity:1}}
+
+@media (max-width:960px){
+  .compare{grid-template-columns:1fr;padding:28px 28px 150px}
+}
+@media (max-width:600px){
+  .cony{width:84px}
+  .cony-walk .bulle,.cony-dance .bulle{display:none}
+  .donut{width:140px}.donut svg{width:120px;height:120px}
+  .donuts{gap:12px}
+  .cony-run{left:-8px;width:96px}
+  .cony-hide{width:80px;top:-64px;left:50%}
+  .cony-peek{right:16px}
+  .cony-eat{justify-self:end}
+}
+@media (prefers-reduced-motion:reduce){.cony *,.floaters svg{animation:none!important}}
+
+footer{background:var(--rouge);color:var(--blanc)}
+footer .wrap{padding-block:44px;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+footer .logo img{height:52px}
+footer .slogan{font-family:var(--wide);font-size:clamp(1.2rem,2.6vw,1.7rem);text-transform:uppercase;color:var(--jaune);letter-spacing:.02em}
+footer p{opacity:.9;font-size:.92rem}
+
+@media (max-width:960px){
+  .hero .wrap,.produit .prod,.histoire .grid,.rse .wrap,.contact .wrap,.preuve .wrap,.sur-mesure{grid-template-columns:1fr}
+  .hero-txt{padding-bottom:8px}
+  .hero-img{padding-block:8px 48px}
+  .plus-grid,.event-grid{grid-template-columns:1fr 1fr}
+  .recettes{grid-template-columns:1fr 1fr}
+  .galerie{grid-template-columns:repeat(2,1fr);grid-auto-rows:200px}
+  .preuve .photo{max-width:460px}
+  .histoire .photo.mex{max-width:460px}
+  section{padding-block:64px}
+}
+@media (max-width:600px){
+  .plus-grid,.event-grid,.recettes,.extras,.chiffres,.etapes,form,.fiche{grid-template-columns:1fr}
+  .duo-photos{grid-template-columns:1fr 1fr}
+  .galerie{grid-auto-rows:160px}
+  nav{order:3;width:100%}
+  nav ul{gap:16px}
+  .sur-mesure{padding:26px}
+  .logo img{height:36px}
+}
+</style>
+</head>
+<body>
+
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="ing-fromage" viewBox="0 0 40 40"><path d="M4 30 L36 30 L36 15 Z" fill="#F7C948" stroke="#D99A1B" stroke-width="1.5" stroke-linejoin="round"/><path d="M4 30 L36 15 L36 11 L6 26 Z" fill="#FBDD7A" stroke="#D99A1B" stroke-width="1.5" stroke-linejoin="round"/><circle cx="25" cy="25" r="2.6" fill="#E0A82E"/><circle cx="31" cy="21.5" r="1.8" fill="#E0A82E"/><circle cx="17" cy="27.5" r="1.5" fill="#E0A82E"/></symbol>
+    <symbol id="ing-jambon" viewBox="0 0 40 40"><circle cx="20" cy="20" r="15" fill="#F2A1A8" stroke="#E07884" stroke-width="2"/><path d="M11 17 q5 -4 9 0 t9 1" fill="none" stroke="#FBD3D6" stroke-width="2.4" stroke-linecap="round"/><path d="M12 25 q6 3 13 -1" fill="none" stroke="#FBD3D6" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="ing-poivron" viewBox="0 0 40 40"><path d="M20 11 C10 9 7 18 9 25 C11 33 17 35 20 31 C23 35 29 33 31 25 C33 18 30 9 20 11 Z" fill="#E3342F" stroke="#B8231F" stroke-width="1.5"/><path d="M20 11 C20 7 22 5 25 4" fill="none" stroke="#3B8C3A" stroke-width="3" stroke-linecap="round"/><path d="M14 16 q-2 5 0 10" stroke="#F47A73" stroke-width="2" fill="none" stroke-linecap="round"/></symbol>
+    <symbol id="ing-poivron-v" viewBox="0 0 40 40"><path d="M20 11 C10 9 7 18 9 25 C11 33 17 35 20 31 C23 35 29 33 31 25 C33 18 30 9 20 11 Z" fill="#4FA34A" stroke="#2F7A2C" stroke-width="1.5"/><path d="M20 11 C20 7 22 5 25 4" fill="none" stroke="#2F6B2C" stroke-width="3" stroke-linecap="round"/><path d="M14 16 q-2 5 0 10" stroke="#8BCB82" stroke-width="2" fill="none" stroke-linecap="round"/></symbol>
+    <symbol id="ing-poulet" viewBox="0 0 40 40"><ellipse cx="17" cy="17" rx="11" ry="9" transform="rotate(-35 17 17)" fill="#D2873A" stroke="#A9601E" stroke-width="1.5"/><path d="M12 13 q4 -3 8 -1" stroke="#E9AE6B" stroke-width="2" fill="none" stroke-linecap="round"/><rect x="24" y="22" width="5" height="11" rx="2" transform="rotate(-45 26 27)" fill="#FFF8EC" stroke="#D9CBB0" stroke-width="1.2"/><circle cx="32" cy="31" r="3" fill="#FFF8EC" stroke="#D9CBB0" stroke-width="1.2"/><circle cx="34" cy="28" r="3" fill="#FFF8EC" stroke="#D9CBB0" stroke-width="1.2"/></symbol>
+    <symbol id="ing-tomate" viewBox="0 0 40 40"><circle cx="20" cy="22" r="13" fill="#E53D2F" stroke="#B82A1F" stroke-width="1.5"/><path d="M20 10 l3 4 l5 -1 l-3 4 l3 3 l-6 -1 l-2 4 l-2 -4 l-6 1 l3 -3 l-3 -4 l5 1 z" fill="#3B8C3A"/><ellipse cx="14" cy="20" rx="2.5" ry="4" fill="#F58A7F"/></symbol>
+    <symbol id="ing-mozza" viewBox="0 0 40 40"><circle cx="20" cy="20" r="13" fill="#FBFAF4" stroke="#DDD6C4" stroke-width="2"/><ellipse cx="15" cy="15" rx="4" ry="2.6" fill="#FFFFFF"/><path d="M27 24 q-3 4 -8 4" stroke="#E8E1CF" stroke-width="2" fill="none" stroke-linecap="round"/></symbol>
+    <symbol id="ing-chevre" viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" fill="#D9D4C7"/><circle cx="20" cy="20" r="11" fill="#FBF9F2"/><circle cx="16" cy="18" r="1.3" fill="#E6E0D0"/><circle cx="23" cy="23" r="1.6" fill="#E6E0D0"/><circle cx="24" cy="15" r="1" fill="#E6E0D0"/></symbol>
+    <symbol id="ing-oignon" viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" fill="none" stroke="#B15C9B" stroke-width="3"/><circle cx="20" cy="20" r="9" fill="none" stroke="#C987B8" stroke-width="2.5"/><circle cx="20" cy="20" r="4.5" fill="none" stroke="#DDB1D2" stroke-width="2"/></symbol>
+    <symbol id="ing-pdt" viewBox="0 0 40 40"><path d="M8 21 C7 12 17 8 26 10 C34 12 35 22 31 28 C27 34 15 34 11 30 C9 28 8 25 8 21 Z" fill="#DDB56F" stroke="#B48A44" stroke-width="1.5"/><circle cx="16" cy="17" r="1.4" fill="#B48A44"/><circle cx="25" cy="22" r="1.4" fill="#B48A44"/><circle cx="19" cy="27" r="1.2" fill="#B48A44"/><circle cx="27" cy="15" r="1" fill="#B48A44"/></symbol>
+    <symbol id="ing-lardon" viewBox="0 0 40 40"><g transform="rotate(-15 20 20)"><rect x="8" y="13" width="24" height="14" rx="3" fill="#E7898B" stroke="#C25B60" stroke-width="1.5"/><rect x="8" y="18" width="24" height="3.5" fill="#FBE4E1"/></g></symbol>
+  </defs>
+</svg>
+<header class="top">
+  <div class="wrap">
+    <a href="#accueil" class="logo" aria-label="PICONO, accueil"><img src="img/logo-rouge.png" alt="PICONO" width="900" height="435"></a>
+    <nav aria-label="Navigation principale">
+      <ul>
+        <li><a href="#produit">Le produit</a></li>
+        <li><a href="#carte">La carte</a></li>
+        <li><a href="#allergenes">Allergènes</a></li>
+        <li><a href="#histoire">Notre histoire</a></li>
+        <li><a href="#evenements">Événements</a></li>
+      </ul>
+    </nav>
+    <a href="#contact" class="btn small">Demander un devis</a>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="accueil">
+  <div class="wrap">
+    <div class="hero-txt">
+      <div class="badges"><span class="badge">Festivals</span><span class="badge">Marchés</span><span class="badge">Événements</span></div>
+      <h1>La pizza en cône</h1>
+      <p class="lead">Une pâte à pizza façonnée en cône, garnie comme une vraie pizza, qui se mange à la main comme une glace. Pensée pour les festivals, les marchés et tous les événements où le public mange debout.</p>
+      <div class="ctas">
+        <a href="#contact" class="btn">Nous faire venir sur votre événement</a>
+        <a href="#carte" class="btn outline">Voir la carte</a>
+      </div>
+    </div>
+    <div class="hero-img">
+      <img src="img/cone-detoure.png" alt="Un Picono margherita garni de mozzarella et de basilic" width="212" height="329">
+    </div>
+  </div>
+</section>
+
+<section class="bandeau" aria-label="Le camion Picono au festival Rio Loco">
+  <img src="img/foule.jpg" alt="File de festivaliers devant le camion Picono à Rio Loco 2026" width="1400" height="1050">
+  <div class="cap"><div class="wrap"><p>2 500 Picono servis à Rio Loco</p><span>Toulouse · 2026 · 5 jours</span></div></div>
+</section>
+
+<section aria-labelledby="plus-titre">
+  <div class="wrap">
+    <div class="head-cony">
+      <div class="stack">
+        <p class="eyebrow">Ce que Picono change</p>
+        <h2 id="plus-titre">Plus pratique, plus gourmand, plus rapide, plus iconique</h2>
+      </div>
+      <div class="cony cony-walk" data-anim aria-hidden="true"><span class="bulle">Salut !</span><div class="cony-body"><img class="cony-img" src="img/cony.png" alt="" width="386" height="520"></div></div>
+    </div>
+    <div class="plus-grid">
+      <div class="plus-item"><span class="k">Plus pratique</span><p>Se mange à la main, en marchant, sans couverts ni vaisselle.</p></div>
+      <div class="plus-item"><span class="k">Plus gourmand</span><p>La même recette qu'une pizza traditionnelle.</p></div>
+      <div class="plus-item"><span class="k">Plus rapide</span><p>Pré-cuit dans notre laboratoire, fini et servi en moins d'une minute.</p></div>
+      <div class="plus-item"><span class="k">Plus iconique</span><p>Un format qui se remarque, fait pour les événements à forte affluence.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="produit" id="produit" aria-labelledby="produit-titre">
+  <div class="wrap prod">
+    <div class="photo"><img src="img/labo-cones.jpg" alt="Antoine et Benoît garnissent des cônes Picono dans leur laboratoire" width="933" height="1400"></div>
+    <div class="stack">
+      <p class="eyebrow">Le produit</p>
+      <h2 id="produit-titre">Une pizza qui se tient comme une glace</h2>
+      <p class="lead">Picono, c'est une pâte à pizza travaillée pour tenir la forme d'un cône, garnie de sauce, de fromage et des ingrédients d'une pizza classique. Le public l'attrape au stand et repart avec, sans plateau ni table.</p>
+      <ul class="checks">
+        <li>Il se mange comme une glace</li>
+        <li>Il ne coule pas</li>
+        <li>Pas de déchets, une simple serviette</li>
+        <li>On peut manger, danser et marcher en même temps</li>
+      </ul>
+      <div class="fiche">
+        <div><b>Fabrication</b>Pré-cuit en laboratoire, Haute-Garonne</div>
+        <div><b>Finition sur place</b>Moins d'une minute</div>
+        <div><b>Service</b>À la main, avec une serviette</div>
+        <div><b>Recettes</b>6 à la carte + sur mesure</div>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="compare">
+      <div class="stack comp-txt">
+        <p class="eyebrow">Plus gourmand</p>
+        <h3 class="comp-title">Plus de garniture, moins de pâte</h3>
+        <p>Dans une part de pizza, la pâte prend la plus grande place. Dans un Picono, c'est l'inverse : le cône se remplit sur toute sa hauteur, donc chaque bouchée est garnie jusqu'au bout.</p>
+      </div>
+      <div class="donuts">
+        <figure class="donut" data-anim>
+          <svg viewBox="0 0 42 42" role="img" aria-label="Une part de pizza : 60 % de pâte, 40 % de garniture">
+            <circle cx="21" cy="21" r="15.915" fill="none" stroke="var(--pate)" stroke-width="7"/>
+            <circle class="seg" cx="21" cy="21" r="15.915" fill="none" stroke="var(--rouge)" stroke-width="7" stroke-dasharray="40 60" stroke-dashoffset="25" style="--g:40"/>
+            <text x="21" y="21" class="d-num">40%</text>
+            <text x="21" y="26.5" class="d-lab">garniture</text>
+          </svg>
+          <figcaption><b>Une part de pizza</b><span><i class="sw sw-g"></i>40 % garniture</span><span><i class="sw sw-p"></i>60 % pâte</span></figcaption>
+        </figure>
+        <figure class="donut" data-anim>
+          <svg viewBox="0 0 42 42" role="img" aria-label="Un Picono : 40 % de pâte, 60 % de garniture">
+            <circle cx="21" cy="21" r="15.915" fill="none" stroke="var(--pate)" stroke-width="7"/>
+            <circle class="seg" cx="21" cy="21" r="15.915" fill="none" stroke="var(--rouge)" stroke-width="7" stroke-dasharray="60 40" stroke-dashoffset="25" style="--g:60"/>
+            <text x="21" y="21" class="d-num">60%</text>
+            <text x="21" y="26.5" class="d-lab">garniture</text>
+          </svg>
+          <figcaption><b>Un Picono</b><span><i class="sw sw-g"></i>60 % garniture</span><span><i class="sw sw-p"></i>40 % pâte</span></figcaption>
+        </figure>
+      </div>
+      <div class="cony cony-peek" data-anim aria-hidden="true"><span class="bulle">+ de garniture !</span><div class="cony-body"><img class="cony-img" src="img/cony.png" alt="" width="386" height="520"></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="carte" aria-labelledby="carte-titre">
+  <div class="wrap">
+    <div class="carte-head">
+      <div class="stack">
+        <p class="eyebrow">La carte</p>
+        <h2 id="carte-titre">Nos recettes Picono</h2>
+      </div>
+      <p class="lead" style="max-width:44ch">Six recettes signatures, et la possibilité d'en créer de nouvelles pour votre événement.</p>
+    </div>
+    <div class="recettes">
+      <article class="recette"><span class="floaters" aria-hidden="true"><svg><use href="#ing-jambon"/></svg><svg><use href="#ing-mozza"/></svg><svg><use href="#ing-tomate"/></svg></span><h3>Jambon-fromage</h3><p class="ingr">Jambon · Mozzarella · Sauce tomate</p></article>
+      <article class="recette"><span class="floaters" aria-hidden="true"><svg><use href="#ing-poulet"/></svg><svg><use href="#ing-mozza"/></svg><svg><use href="#ing-tomate"/></svg></span><h3>Poulet-fromage</h3><p class="ingr">Poulet · Mozzarella · Sauce tomate</p></article>
+      <article class="recette"><span class="floaters" aria-hidden="true"><svg><use href="#ing-fromage"/></svg><svg><use href="#ing-chevre"/></svg><svg><use href="#ing-mozza"/></svg></span><h3>4 Fromages</h3><p class="ingr">Emmental · Bleu · Mozzarella · Chèvre</p><span class="tagv">Végétarien</span></article>
+      <article class="recette"><span class="floaters" aria-hidden="true"><svg><use href="#ing-poivron"/></svg><svg><use href="#ing-oignon"/></svg><svg><use href="#ing-poivron-v"/></svg></span><h3>Veggie</h3><p class="ingr">Poivrons · Oignons · Sauce créole · Mozzarella · Sauce tomate</p><span class="tagv">Végétarien</span></article>
+      <article class="recette"><span class="floaters" aria-hidden="true"><svg><use href="#ing-fromage"/></svg><svg><use href="#ing-jambon"/></svg><svg><use href="#ing-pdt"/></svg></span><h3>Raclette</h3><p class="ingr">Jambon de pays · Fromage à raclette · Pommes de terre · Crème fraîche</p><span class="tagv saison">Spécial hiver</span></article>
+      <article class="recette"><span class="floaters" aria-hidden="true"><svg><use href="#ing-pdt"/></svg><svg><use href="#ing-lardon"/></svg><svg><use href="#ing-oignon"/></svg></span><h3>Tartiflette</h3><p class="ingr">Pommes de terre · Oignons · Lardons · Reblochon · Crème fraîche</p><span class="tagv saison">Spécial hiver</span></article>
+    </div>
+    <div class="sur-mesure">
+      <div class="stack">
+        <h3>Une recette rien que pour vous</h3>
+        <p>Feria, mariage, séminaire, marché de terroir : nous créons des Picono sur mesure selon le thème, les produits locaux ou les contraintes de votre public.</p>
+      </div>
+      <ul>
+        <li>Recette aux couleurs de votre événement</li>
+        <li>Produits régionaux mis en avant</li>
+        <li>Options végétariennes adaptées</li>
+        <li>Version sucrée : Picono chocolat</li>
+      </ul>
+      <div class="cony cony-eat" data-anim aria-hidden="true"><span class="bulle">Miam !</span><div class="cony-body"><img class="mini-cone" src="img/cone-detoure.png" alt="" width="212" height="329"><span class="miettes"><i></i><i></i><i></i></span><img class="cony-img" src="img/cony.png" alt="" width="386" height="520"></div></div>
+    </div>
+    <div class="extras">
+      <div class="extra">
+        <p class="eyebrow">Notre touche mexicaine</p>
+        <div class="ex-img"><img src="img/nachos.jpg" alt="Totopos nappés de cheddar fondu et de rondelles de jalapeño" loading="lazy" width="1000" height="868"></div>
+        <h3>Totopos et cheddar</h3>
+        <p>Des chips de maïs traditionnelles mexicaines, servies avec du cheddar fondu. Un clin d'œil à nos années au Mexique.</p>
+      </div>
+      <div class="extra">
+        <p class="eyebrow">Desserts</p>
+        <h3>Pour finir en douceur</h3>
+        <div class="pills">
+          <span class="pill">Chocolat chaud mexicain</span>
+          <span class="pill">Picono chocolat</span>
+          <span class="pill">Cookie</span>
+          <span class="pill">Muffin</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="allergenes" id="allergenes" aria-labelledby="allergenes-titre">
+  <div class="wrap">
+    <div class="carte-head">
+      <div class="stack">
+        <p class="eyebrow">Informations allergènes</p>
+        <h2 id="allergenes-titre">Allergènes</h2>
+      </div>
+      <p class="lead" style="max-width:48ch">Notre pâte à pizza contient du blé et toutes nos recettes salées contiennent du fromage. Le détail complet est disponible sur demande et affiché au stand.</p>
+    </div>
+    <div class="table-wrap">
+      <table class="al-table">
+        <thead><tr><th scope="col">Produit</th><th scope="col">Gluten</th><th scope="col">Lait</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Picono Jambon-fromage</th><td><span class="al oui">Oui</span></td><td><span class="al oui">Oui</span></td></tr>
+          <tr><th scope="row">Picono Poulet-fromage</th><td><span class="al oui">Oui</span></td><td><span class="al oui">Oui</span></td></tr>
+          <tr><th scope="row">Picono 4 Fromages</th><td><span class="al oui">Oui</span></td><td><span class="al oui">Oui</span></td></tr>
+          <tr><th scope="row">Picono Veggie</th><td><span class="al oui">Oui</span></td><td><span class="al oui">Oui</span></td></tr>
+          <tr><th scope="row">Picono Raclette</th><td><span class="al oui">Oui</span></td><td><span class="al oui">Oui</span></td></tr>
+          <tr><th scope="row">Picono Tartiflette</th><td><span class="al oui">Oui</span></td><td><span class="al oui">Oui</span></td></tr>
+          <tr><th scope="row">Totopos et cheddar<br><span class="hint">Peut contenir des traces de soja</span></th><td><span class="al non">Non</span></td><td><span class="al oui">Oui</span></td></tr>
+          <tr><th scope="row">Cookie</th><td><span class="al oui">Oui</span></td><td><span class="al oui">Oui</span></td></tr>
+          <tr><th scope="row">Muffin</th><td><span class="al oui">Oui</span></td><td><span class="al oui">Oui</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="al-legende">
+      <p><b>Les 14 allergènes réglementaires :</b> gluten, crustacés, œufs, poissons, arachides, soja, lait, fruits à coque, céleri, moutarde, graines de sésame, sulfites, lupin, mollusques.</p>
+      <p class="hint">Nos produits sont préparés dans un laboratoire et un camion où ces allergènes peuvent être présents. En cas d'allergie, parlez-en à notre équipe avant de commander.</p>
+    </div>
+  </div>
+</section>
+
+<section class="preuve" aria-labelledby="preuve-titre">
+  <div class="wrap">
+    <div class="stack">
+      <p class="eyebrow">Testé en conditions réelles</p>
+      <h2 id="preuve-titre">Rio Loco 2026 : le concept a fait ses preuves</h2>
+      <p class="lead">Au festival Rio Loco à Toulouse, les festivaliers ont adoré le produit. Notre organisation nous a permis de tenir notre promesse de service ultra-rapide, même aux heures de pointe, avec un temps d'attente quasi nul.</p>
+      <div class="chiffres">
+        <div class="chiffre"><span class="n">2 500+</span><span class="u">Picono vendus</span><span class="d">en 5 jours de festival</span></div>
+        <div class="chiffre"><span class="n">44</span><span class="u">toutes les 5 minutes</span><span class="d">rendement de notre four</span></div>
+        <div class="chiffre"><span class="n">6+</span><span class="u">par minute</span><span class="d">débit maximum au stand</span></div>
+      </div>
+    </div>
+    <div class="photo-cony">
+      <div class="photo"><img src="img/service.jpg" alt="L'équipe Picono sert les festivaliers depuis le camion" width="933" height="1400"></div>
+      <div class="cony cony-run" data-anim aria-hidden="true"><span class="bulle">6 par minute !</span><div class="cony-body"><span class="vitesse"><i></i><i></i><i></i></span><img class="cony-img" src="img/cony.png" alt="" width="386" height="520"></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="histoire" id="histoire" aria-labelledby="histoire-titre">
+  <div class="wrap">
+    <div class="grid">
+      <div class="mex-wrap">
+        <div class="cony cony-hide" data-anim aria-hidden="true"><span class="bulle">¡Hola!</span><div class="cony-body"><img class="cony-img" src="img/cony.png" alt="" width="386" height="520"></div></div>
+        <div class="photo mex"><img src="img/mexique.jpg" alt="Benoît et Antoine enfant, main dans la main dans une rue du Mexique" width="1050" height="1400"></div>
+      </div>
+      <div class="recit">
+        <p class="eyebrow">Notre histoire</p>
+        <h2 id="histoire-titre">Un père et son fils</h2>
+        <p>Nous sommes Benoît et Antoine, père et fils. Il y a une dizaine d'années, nous vivions au Mexique, où Benoît avait une franchise de pizzeria qui s'appelait « Ciao ». C'est là qu'est née notre passion commune pour la street-food, et plus particulièrement pour la pizza.</p>
+        <p>Au Mexique, nous avons aussi découvert un concept de pizza en forme de cône. L'idée nous est restée en tête pendant des années. Nous voulions créer quelque chose de plus original, et surtout plus pratique qu'une simple part de pizza.</p>
+        <p>C'est ainsi qu'est né Picono : un produit gourmand, pratique à manger et pensé pour les festivals et les marchés.</p>
+        <p class="sign">Benoît &amp; Antoine</p>
+        <div class="etapes">
+          <div class="etape"><b>Au Mexique</b>La pizzeria « Ciao » et la découverte de la pizza en cône.</div>
+          <div class="etape"><b>En Haute-Garonne</b>Mise au point de la pâte, du façonnage et de la cuisson.</div>
+          <div class="etape"><b>2026</b>Lancement de Picono et premier grand festival à Rio Loco.</div>
+        </div>
+        <div class="duo-photos">
+          <div class="photo"><img src="img/fenetre.jpg" alt="Benoît et Antoine à la fenêtre du camion Picono" width="933" height="1400"></div>
+          <div class="photo wide"><img src="img/degustation.jpg" alt="Benoît et Antoine goûtent leurs Picono au laboratoire" width="1400" height="933"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="coulisses" aria-labelledby="coulisses-titre">
+  <div class="wrap">
+    <p class="eyebrow">Have a nice cone</p>
+    <h2 id="coulisses-titre" style="margin-top:12px">Du labo au festival</h2>
+    <div class="galerie">
+      <figure class="g-tall"><img src="img/machine.jpg" alt="Benoît devant la machine de façonnage des cônes" loading="lazy" width="933" height="1400"><figcaption>Le façonnage</figcaption></figure>
+      <figure class="g-wide"><img src="img/enseigne.jpg" alt="L'enseigne jaune du camion Picono pendant le service" loading="lazy" width="1400" height="1050"><figcaption>En service</figcaption></figure>
+      <figure class="g-tall"><img src="img/nuit.jpg" alt="Un membre de l'équipe en t-shirt Have a nice cone devant le camion le soir" loading="lazy" width="788" height="1400"><figcaption>Le soir à Rio Loco</figcaption></figure>
+      <figure><img src="img/labo-dos.jpg" alt="Benoît et Antoine de dos, cônes levés, au laboratoire" loading="lazy" width="933" height="1400"><figcaption>Au labo</figcaption></figure>
+      <figure><img src="img/equipe.jpg" alt="L'équipe Picono dans le camion, cônes en main" loading="lazy" width="787" height="1400"><figcaption>L'équipe</figcaption></figure>
+      <figure class="g-wide"><img src="img/quatre.jpg" alt="Quatre membres de l'équipe de dos devant le camion" loading="lazy" width="1050" height="1400" style="object-position:50% 60%"><figcaption>Have a nice cone</figcaption></figure>
+      <figure class="g-tall"><img src="img/duo-camion.jpg" alt="Antoine et Benoît, bras croisés, devant le camion" loading="lazy" width="1050" height="1400" style="object-position:50% 62%"><figcaption>Prêts pour le service</figcaption></figure>
+      <figure class="g-wide"><img src="img/camion.jpg" alt="Le camion Picono installé sous les arbres" loading="lazy" width="787" height="1400" style="object-position:50% 55%"><figcaption>Notre camion</figcaption></figure>
+      <figure class="g-tall"><img src="img/labo-leve.jpg" alt="Antoine et Benoît lèvent leurs cônes au laboratoire" loading="lazy" width="933" height="1400" style="object-position:50% 25%"><figcaption>Les premiers cônes</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="evenements" aria-labelledby="events-titre">
+  <div class="wrap">
+    <div class="head-cony">
+      <div class="stack">
+        <p class="eyebrow">Pour les professionnels</p>
+        <h2 id="events-titre">Là où votre public mange debout</h2>
+      </div>
+      <div class="cony cony-dance" data-anim aria-hidden="true"><div class="cony-body"><span class="notes"><i>♪</i><i>♫</i><i>♪</i></span><img class="cony-img" src="img/cony.png" alt="" width="386" height="520"></div></div>
+    </div>
+    <p class="lead" style="margin-top:16px">Organisateurs, mairies, traiteurs, comités des fêtes : nous venons avec notre camion, notre four et notre équipe.</p>
+    <div class="event-grid">
+      <div class="event"><h3>Festivals</h3><p>Concerts et grandes jauges, service rapide sans file interminable.</p></div>
+      <div class="event"><h3>Ferias</h3><p>Un format qui se mange en marchant dans la foule.</p></div>
+      <div class="event"><h3>Marchés de Noël</h3><p>Recettes d'hiver, raclette, tartiflette et chocolat chaud.</p></div>
+      <div class="event"><h3>Marchés</h3><p>Marchés de producteurs, nocturnes et marchés d'été.</p></div>
+      <div class="event"><h3>Mariages</h3><p>Un cocktail ou une fin de soirée qui surprend les invités.</p></div>
+      <div class="event"><h3>Traiteur</h3><p>Prestations sur devis, recettes adaptées à votre menu.</p></div>
+      <div class="event"><h3>Sport</h3><p>Courses, matchs et tournois, à manger entre deux actions.</p></div>
+      <div class="event"><h3>Entreprises</h3><p>Séminaires, soirées d'équipe et inaugurations.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="rse" aria-labelledby="rse-titre">
+  <div class="wrap">
+    <div class="stack">
+      <p class="eyebrow">Picono responsable</p>
+      <h2 id="rse-titre">Moins de déchets, plus de local</h2>
+      <p class="lead">Le cône remplace l'assiette et les couverts. Ce qui reste après un Picono, c'est une serviette.</p>
+    </div>
+    <ul class="rse-list">
+      <li>Réduction du gaspillage alimentaire</li>
+      <li>Production maîtrisée et locale, en Haute-Garonne</li>
+      <li>Servi avec une simple serviette</li>
+      <li>Logique d'économie circulaire</li>
+      <li>Ingrédients français privilégiés</li>
+    </ul>
+  </div>
+</section>
+
+<section class="contact" id="contact" aria-labelledby="contact-titre">
+  <div class="wrap">
+    <div class="stack">
+      <p class="eyebrow">Contact</p>
+      <h2 id="contact-titre">Parlons de votre événement</h2>
+      <p class="lead">Dites-nous où, quand et pour combien de personnes. Nous revenons vers vous avec une proposition adaptée et, si besoin, une recette sur mesure.</p>
+      <div class="mail-box">
+        <span class="hint">Par e-mail</span>
+        <span class="addr">lepicono@gmail.com</span>
+      </div>
+      <div class="mail-box">
+        <span class="hint">Suivez-nous</span>
+        <div class="socials">
+          <a href="https://www.instagram.com/picono.fr/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.3" fill="currentColor"/></svg><span>Instagram · picono.fr</span></a>
+          <a href="https://www.tiktok.com/@picono.fr" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M14 3v11.5a3.5 3.5 0 1 1-3-3.46V8.1A6.5 6.5 0 1 0 17 14.5V8.7a7 7 0 0 0 4 1.3V7a4 4 0 0 1-4-4z" fill="currentColor"/></svg><span>TikTok · picono.fr</span></a>
+        </div>
+      </div>
+      <div class="cony cony-wave" data-anim aria-hidden="true"><span class="bulle">Have a nice cone !</span><div class="cony-body"><img class="cony-img" src="img/cony.png" alt="" width="386" height="520"></div></div>
+    </div>
+    <form id="devis" novalidate>
+      <div class="f"><label for="nom">Nom et prénom</label><input id="nom" name="nom" autocomplete="name"></div>
+      <div class="f"><label for="structure">Structure</label><input id="structure" name="structure" placeholder="Festival, mairie, agence…"></div>
+      <div class="f"><label for="email">E-mail</label><input id="email" name="email" type="email" autocomplete="email"></div>
+      <div class="f"><label for="tel">Téléphone</label><input id="tel" name="tel" type="tel" autocomplete="tel"></div>
+      <div class="f"><label for="type">Type d'événement</label>
+        <select id="type" name="type">
+          <option>Festival</option><option>Feria</option><option>Marché de Noël</option><option>Marché</option>
+          <option>Mariage</option><option>Service traiteur</option><option>Événement sportif</option><option>Événement d'entreprise</option><option>Autre</option>
+        </select>
+      </div>
+      <div class="f"><label for="date">Date(s)</label><input id="date" name="date" placeholder="ex. 12 au 14 juin 2027"></div>
+      <div class="f"><label for="lieu">Lieu</label><input id="lieu" name="lieu" placeholder="Ville"></div>
+      <div class="f"><label for="public">Fréquentation attendue</label>
+        <select id="public" name="public">
+          <option>Moins de 200 personnes</option><option>200 à 1 000 personnes</option><option>1 000 à 5 000 personnes</option><option>Plus de 5 000 personnes</option>
+        </select>
+      </div>
+      <div class="f full"><label for="message">Votre projet</label><textarea id="message" name="message" placeholder="Durée, horaires, recette sur mesure souhaitée…"></textarea></div>
+      <div class="f full" style="flex-direction:row;align-items:center;gap:14px;flex-wrap:wrap">
+        <button class="btn" type="submit">Préparer ma demande</button>
+        <span class="hint" id="err" role="alert"></span>
+      </div>
+      <div class="result" id="result" hidden>
+        <strong>Votre demande est prête. Copiez-la et envoyez-la à lepicono@gmail.com.</strong>
+        <pre id="out"></pre>
+        <div class="row">
+          <button class="btn small" type="button" id="copy">Copier la demande</button>
+          <span class="hint" id="copied" aria-live="polite"></span>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a href="#accueil" class="logo" aria-label="PICONO, haut de page"><img src="img/logo-blanc.png" alt="PICONO" width="900" height="435"></a>
+    <span class="slogan">Have a nice cone</span>
+    <div class="socials foot">
+          <a href="https://www.instagram.com/picono.fr/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.3" fill="currentColor"/></svg><span>Instagram · picono.fr</span></a>
+          <a href="https://www.tiktok.com/@picono.fr" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M14 3v11.5a3.5 3.5 0 1 1-3-3.46V8.1A6.5 6.5 0 1 0 17 14.5V8.7a7 7 0 0 0 4 1.3V7a4 4 0 0 1-4-4z" fill="currentColor"/></svg><span>TikTok · picono.fr</span></a>
+        </div>
+    <p>La pizza en cône · Fabriquée en Haute-Garonne · lepicono@gmail.com</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('[data-anim]');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('on')});}
+  else{var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('on');io.unobserve(x.target)}})},{threshold:.35});els.forEach(function(e){io.observe(e)});}
+})();
+(function(){
+  var form=document.getElementById('devis'),out=document.getElementById('out'),res=document.getElementById('result'),err=document.getElementById('err');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var v=function(id){return document.getElementById(id).value.trim()};
+    if(!v('nom')||!v('email')){err.textContent='Indiquez au moins votre nom et votre e-mail.';return}
+    err.textContent='';
+    var t='Objet : Demande de prestation Picono – '+v('type')+'\n\n'+
+      'Nom : '+v('nom')+'\n'+(v('structure')?'Structure : '+v('structure')+'\n':'')+
+      'E-mail : '+v('email')+'\n'+(v('tel')?'Téléphone : '+v('tel')+'\n':'')+
+      'Type d’événement : '+v('type')+'\n'+(v('date')?'Date(s) : '+v('date')+'\n':'')+
+      (v('lieu')?'Lieu : '+v('lieu')+'\n':'')+'Fréquentation : '+v('public')+'\n'+
+      (v('message')?'\n'+v('message')+'\n':'');
+    out.textContent=t;res.hidden=false;res.scrollIntoView({block:'nearest'});
+  });
+  document.getElementById('copy').addEventListener('click',function(){
+    var msg=document.getElementById('copied');
+    var sel=function(){var r=document.createRange();r.selectNodeContents(out);var s=getSelection();s.removeAllRanges();s.addRange(r);msg.textContent='Texte sélectionné, copiez-le avec Ctrl+C.'};
+    try{navigator.clipboard.writeText(out.textContent).then(function(){msg.textContent='Copié.'},sel)}catch(x){sel()}
+  });
+})();
+</script>
+
+</body>
+</html>
